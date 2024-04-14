@@ -1,4 +1,17 @@
-/* You can add global styles to this file, and also import other style files */
+/* SCSS Global */
+/* Inicio da config de customização do material - Aula 5 */
+@import '@angular/material/theming'; //importando boa parte dos temas do material
+@include mat-core();
+
+$custom-app-primary: mat-palette($mat-blue); //variavel da cor primaria do projeto
+$custom-app-secondary: mat-palette($mat-indigo, A200, A400, 700); //variavel da cor secundaria do projeto
+$custom-app-warn: mat-palette($mat-red); //variavel da cor de avisos/erros do projeto
+
+//variavel da cor do tema backgroud do projeto (ela é uma mistura das cores acima)
+$custom-theme: mat-light-theme($custom-app-primary, $custom-app-secondary, $custom-app-warn);
+
+@include angular-material-theme($custom-theme); //incluindo o tema criado no lugar do tema padrao.
+/* Fim da config de customização do material */
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
