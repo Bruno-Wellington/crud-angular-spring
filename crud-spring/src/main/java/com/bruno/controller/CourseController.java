@@ -18,7 +18,7 @@ public class CourseController {
     
     private final CourseRepository courseRepository;
 
-    /*Construtor ja criado pela anotação do LOMBOK
+    /*Construtor ja criado pela anotação do LOMBOK @AllArgsConstructor
     public CourseController(CourseRepository courseRepository) {
         this.courseRepository = courseRepository;
     }*/
