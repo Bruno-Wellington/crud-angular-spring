@@ -37,9 +37,7 @@ export class CoursesComponent implements OnInit {
       });
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   onAdd(){
     this.router.navigate(['new'], {relativeTo: this.route});
