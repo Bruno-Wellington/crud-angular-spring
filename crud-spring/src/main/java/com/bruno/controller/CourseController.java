@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -67,5 +68,15 @@ public class CourseController {
                 return ResponseEntity.ok().body(updated);
             })
             .orElse(ResponseEntity.notFound().build());//tratamento caso nao ache o id
+    }
+
+    @DeleteMapping("/{id}")//Busca na Url o id
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        return courseRepository.findById(id)
+        .map(recordFound -> {
+            courseRepository.deleteById(id);
+            return ResponseEntity.noContent().<Void>build(); // o void antes do build faz o casting da resposta do responseEntity para vazio.
+        })
+        .orElse(ResponseEntity.notFound().build());//tratamento caso nao ache o id
     }
 }
