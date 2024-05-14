@@ -7,6 +7,7 @@ import { ErrorDialogComponent } from 'src/app/shared/components/error-dialog/err
 
 import { Course } from '../../model/course';
 import { CoursesService } from '../../services/courses.service';
+import { ConfirmationDialogComponent } from 'src/app/shared/components/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-courses',
@@ -55,16 +56,26 @@ export class CoursesComponent implements OnInit {
   }
 
   onRemove(course: Course){
-    this.coursesService.remove(course._id).subscribe(
-      () => {
-        this.refresh();//Atualiza a pagina depois de remover um curso da lista
-        this.snackBar.open('Curso removido com sucesso!', 'X', {
-          duration: 1500, //duração da popup
-          //verticalPosition: 'top', //Mostra a popup no topo
-          horizontalPosition: 'center'// centraliza a popup
-        });
-      },
-      () => this.onError('Erro ao tentar remover curso!')
-    );
+     /*Popap para confirmar a exclusão*/
+     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: 'Tem certeza que deseja remover esse curso?',
+    });
+
+    /*Codigo que faz a explusão*/
+    dialogRef.afterClosed().subscribe((result: boolean) => {
+      if(result){
+        this.coursesService.remove(course._id).subscribe(
+          () => {
+            this.refresh();//Atualiza a pagina depois de remover um curso da lista
+            this.snackBar.open('Curso removido com sucesso!', 'X', {
+              duration: 1500, //duração da popup
+              //verticalPosition: 'top', //Mostra a popup no topo
+              horizontalPosition: 'center'// centraliza a popup
+            });
+          },
+          () => this.onError('Erro ao tentar remover curso!')
+        );
+      }
+    });
   }
 }
