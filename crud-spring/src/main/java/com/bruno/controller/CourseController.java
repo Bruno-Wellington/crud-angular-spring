@@ -78,10 +78,10 @@ public class CourseController {
     @DeleteMapping("/{id}")//Busca na Url o id
     public ResponseEntity<Void> delete(@PathVariable  @NotNull @Positive Long id){
         return courseRepository.findById(id)
-        .map(recordFound -> {
-            courseRepository.deleteById(id);
-            return ResponseEntity.noContent().<Void>build(); // o void antes do build faz o casting da resposta do responseEntity para vazio.
-        })
-        .orElse(ResponseEntity.notFound().build());//tratamento caso nao ache o id
+            .map(recordFound -> {
+                courseRepository.deleteById(id);
+                return ResponseEntity.noContent().<Void>build(); // o void antes do build faz o casting da resposta do responseEntity para vazio.
+            })
+            .orElse(ResponseEntity.notFound().build());//tratamento caso nao ache o id
     }
 }
