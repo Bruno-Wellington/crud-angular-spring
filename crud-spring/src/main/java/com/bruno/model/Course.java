@@ -1,6 +1,5 @@
 package com.bruno.model;
 
-import org.hibernate.Length;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
 
