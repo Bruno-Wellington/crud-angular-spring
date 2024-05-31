@@ -2,6 +2,7 @@ package com.bruno.model;
 
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
+import org.hibernate.validator.constraints.Length;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -29,18 +30,18 @@ public class Course {
 
     @NotBlank
     @NotNull
-    @org.hibernate.validator.constraints.Length(min = 3, max = 100)
+    @Length(min = 3, max = 100)
     @Column(length = 100, nullable = false)
     private String name;
 
     @NotBlank
-    @org.hibernate.validator.constraints.Length(max = 10)
+    @Length(max = 10)
     @Pattern(regexp = "Back-End|Front-End")
     @Column(length = 10, nullable = false)
     private String category;
 
     @NotBlank
-    @org.hibernate.validator.constraints.Length(max = 10)
+    @Length(max = 10)
     @Pattern(regexp = "Ativo|Inativo")
     @Column(length = 10, nullable = false)
     private String status = "Ativo";
