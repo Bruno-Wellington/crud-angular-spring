@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bruno.model.Course;
+import com.bruno.dto.CourseDTO;
 import com.bruno.service.CourseService;
 
 import jakarta.validation.Valid;
@@ -35,25 +35,25 @@ public class CourseController {
 
     //@RequestMapping(method = RequestMethod.GET) ou
     @GetMapping
-    public @ResponseBody List<Course> list(){
+    public @ResponseBody List<CourseDTO> list(){
         return courseService.list();
     }
 
     @GetMapping("/{id}") //Busca na Url o id
-    public Course findById(@PathVariable @NotNull @Positive Long id) {
+    public CourseDTO findById(@PathVariable @NotNull @Positive Long id) {
         return courseService.findById(id);
     }
 
     //@RequestMapping(method = RequestMethod.POST) ou
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Course create(@RequestBody @Valid Course course){
+    public CourseDTO create(@RequestBody @Valid CourseDTO course){
         return courseService.create(course);
     }
 
     @PutMapping("/{id}")//Busca na Url o id
-    public Course update(@PathVariable  @NotNull @Positive Long id, 
-        @RequestBody @Valid Course course){
+    public CourseDTO update(@PathVariable  @NotNull @Positive Long id, 
+        @RequestBody @Valid @NotNull CourseDTO course){
         return courseService.update(id, course);
     }
 
