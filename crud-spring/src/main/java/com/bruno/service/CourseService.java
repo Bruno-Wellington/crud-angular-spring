@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import com.bruno.dto.CourseDTO;
 import com.bruno.dto.mapper.CourseMapper;
+import com.bruno.enums.Category;
 import com.bruno.exception.RecordNotFoundException;
 import com.bruno.repository.CourseRepository;
 
@@ -33,7 +34,6 @@ public class CourseService {
         return courseRepository.findAll()
             .stream()
             .map(courseMapper::toDTO)
-            //.collect(ArrayList::new, ArrayList::add, ArrayList::addAll);
             .collect(Collectors.toList());
     }
 
@@ -52,7 +52,7 @@ public class CourseService {
         return courseRepository.findById(id)
             .map(recordFound -> {
                 recordFound.setName(course.name());
-                recordFound.setCategory(course.category());
+                recordFound.setCategory(Category.FRONT_END);
                 return courseMapper.toDTO(courseRepository.save(recordFound));
             })
             //.map(courseMapper::toDTO)

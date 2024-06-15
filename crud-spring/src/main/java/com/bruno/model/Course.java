@@ -4,9 +4,14 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.SQLRestriction;
 import org.hibernate.validator.constraints.Length;
 
+import com.bruno.enums.Category;
+import com.bruno.enums.Status;
+import com.bruno.enums.converters.CategoryConverter;
+import com.bruno.enums.converters.StatusConverter;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -34,15 +39,21 @@ public class Course {
     @Column(length = 100, nullable = false)
     private String name;
 
-    @NotBlank
-    @Length(max = 10)
-    @Pattern(regexp = "Back-End|Front-End")
+    @NotNull
     @Column(length = 10, nullable = false)
-    private String category;
+    @Convert(converter = CategoryConverter.class)
+    private Category category;
 
-    @NotBlank
+    @NotNull
+    @Length(max = 10)
+    @Column(length = 10, nullable = false)
+    @Convert(converter = StatusConverter.class)
+    private Status status;
+
+    /*
+    @NotNull
     @Length(max = 10)
     @Pattern(regexp = "Ativo|Inativo")
     @Column(length = 10, nullable = false)
-    private String status = "Ativo";
+    private String status = "Ativo";*/
 }
